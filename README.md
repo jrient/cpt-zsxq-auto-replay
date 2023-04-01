@@ -21,3 +21,11 @@ $ pip install openai
 配置定时任务
 
 > 0/30 * * * * your_python your_path/cpt-zsxq-auto-replay/zsxq.py
+
+
+
+## 加入我们
+
+![IMG](./%E5%8A%A0%E5%85%A5%E6%98%9F%E7%90%83.jpg)
+
+![IMG](./%E6%98%9F%E7%90%83%E4%BC%98%E6%83%A0%E5%88%B8.png)
