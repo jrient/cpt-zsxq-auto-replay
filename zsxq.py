@@ -27,6 +27,7 @@ def get_answer(question):
         "max_tokens": 1024
     })
     if response.status_code == 200:
+        print(answer)
         answer = response.json()["choices"][0]["text"]
         return answer
     else:
