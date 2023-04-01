@@ -26,8 +26,8 @@ jobs:
     - name: Working
       run: echo $SECRETS_FILE_CONTENT | base64 -d > lib/path/to/secrets.dart
       env:
-          ZSXQ_GROUP_ID: '${{ secrets.ZSXQ_GROUP_ID }}'
-          OPENAI_API_KEY: '${{ env.OPENAI_API_KEY }}'
-          ZSXQ_GROUP_ID_TEST : '${{ env.ZSXQ_GROUP_ID_TEST }}'
+          ZSXQ_GROUP_ID: ${{ secrets.ZSXQ_GROUP_ID }}
+          OPENAI_API_KEY: ${{ env.OPENAI_API_KEY }}
+          ZSXQ_GROUP_ID_TEST : ${{ env.ZSXQ_GROUP_ID_TEST }}
     - name: Test with pytest
       run: python demo.py
