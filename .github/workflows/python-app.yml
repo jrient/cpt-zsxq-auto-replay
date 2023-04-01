@@ -4,7 +4,7 @@
 name: Run Python script
 on:
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '* * * * *'
   push:
     branches: [ "main" ]
   pull_request:
