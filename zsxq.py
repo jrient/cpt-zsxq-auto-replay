@@ -59,7 +59,7 @@ def post_answer(question_id, answer):
     response = requests.post(post_answer_url, headers={"Cookie": cookie}, json={
         "req_data":{
             "image_ids": [],
-            "text": answer
+            "text": f"ChatGPT: {answer}"
         }
     })
     if (response.status_code == 200) and (response.json()['succeeded']):
