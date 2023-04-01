@@ -13,8 +13,10 @@
 
 安装依赖
 
-> pip install requests
-> pip install openai
+```sh
+$ pip install requests
+$ pip install openai
+```
 
 配置定时任务
 
