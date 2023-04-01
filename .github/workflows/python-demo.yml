@@ -27,4 +27,5 @@ jobs:
       env:
           ZSXQ_GROUP_ID: ${{ secrets.ZSXQ_GROUP_ID }}
           OPENAI_API_KEY: ${{ env.OPENAI_API_KEY }}
+          ZSXQ_GROUP_ID_TEST : ${{ env.ZSXQ_GROUP_ID_TEST }}
       run: python demo.py
