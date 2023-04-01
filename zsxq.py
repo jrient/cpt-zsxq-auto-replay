@@ -6,6 +6,13 @@ group_id = os.getenv("ZSXQ_GROUP_ID")
 cookie = os.getenv("ZSXQ_COOKIE")
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
+if group_id is None:
+    print("请设置环境变量 ZSXQ_GROUP_ID")
+if cookie is None:
+    print("请设置环境变量 ZSXQ_COOKIE")
+if openai.api_key is None:
+    print("请设置环境变量 OPENAI_API_KEY")
+
 # 访问知识星球API，获取问题列表
 def get_questions():
     questions_url = f"https://api.zsxq.com/v2/groups/{group_id}/topics?scope=unanswered_questions&count=20"
