@@ -24,6 +24,12 @@ $ pip install openai
 * * * * * your_python your_path/cpt-zsxq-auto-replay/zsxq.py
 ```
 
+## 通过github action部署
+
+1. fork本项目
+2. 在 `github.com/[your name]/[your project name]/settings/secrets/actions` 下 `New repository secret` 添加 `ZSXQ_GROUP_ID` `ZSXQ_COOKIE` `OPENAI_API_KEY` 三个环境变量
+3. 通过 `github.com/[your name]/[your project name]/actions` 查看运行状态
+
 
 ## 加入我们
 
