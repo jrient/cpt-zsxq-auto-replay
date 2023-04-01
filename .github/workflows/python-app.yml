@@ -18,4 +18,8 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
       - name: Run Python script
+        env:
+            ZSXQ_GROUP_ID: ${{ secrets.ZSXQ_GROUP_ID }}
+            ZSXQ_COOKIE : ${{ secrets.ZSXQ_COOKIE }}
+            OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: python zsxq.py
