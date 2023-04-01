@@ -36,7 +36,7 @@ def get_answer(question):
         model="text-davinci-003",
         prompt=f"{question}",
         temperature=0,
-        max_tokens=64,
+        max_tokens=2048,
         top_p=1.0,
         frequency_penalty=0.0,
         presence_penalty=0.0,
