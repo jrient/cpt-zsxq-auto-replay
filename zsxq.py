@@ -21,7 +21,7 @@ def get_questions():
 def get_answer(question):
     response = openai.Completion.create(
         model="text-davinci-003",
-        prompt="今天是什么日子？",
+        prompt=f"question",
         temperature=0,
         max_tokens=64,
         top_p=1.0,
@@ -29,8 +29,6 @@ def get_answer(question):
         presence_penalty=0.0,
         stop=["\"\"\""]
     )
-    print(response)
-    exit()
     if response.status_code == 200:
         print(answer)
         answer = response.json()["choices"][0]["text"]
@@ -40,9 +38,10 @@ def get_answer(question):
         return ""
 
 # 访问知识星球API，回答问题
-def post_answer(access_token, question_id, answer):
-    post_answer_url = f"https://api.zsxq.com/v2/topics/{question_id}/comments"
-    response = requests.post(post_answer_url, headers={"Authorization": f"Bearer {access_token}"}, json={
+def post_answer(question_id, answer):
+    post_answer_url = f"https://api.zsxq.com/v2/topics/{question_id}/answer"
+    response = requests.post(post_answer_url, headers={"Cookie": cookie}, json={
+        "image_ids": [],
         "text": answer
     })
     if response.status_code == 200:
@@ -65,10 +64,9 @@ def main():
         # 获取答案
         answer_text = get_answer(question_text)
         print(f"生成问题的答案：{answer_text}")
-        exit()
 
         # 发布答案
-        post_answer(access_token, question_id, answer_text)
+        post_answer(question_id, answer_text)
 
 if __name__ == '__main__':
     main()
