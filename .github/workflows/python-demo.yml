@@ -23,11 +23,9 @@ jobs:
       uses: actions/setup-python@v3
       with:
         python-version: "3.10"
-    - name: Working
-      run: echo $SECRETS_FILE_CONTENT | base64 -d > lib/path/to/secrets.dart
+    - name: Test with pytest
       env:
           ZSXQ_GROUP_ID: ${{ secrets.ZSXQ_GROUP_ID }}
           OPENAI_API_KEY: ${{ env.OPENAI_API_KEY }}
           ZSXQ_GROUP_ID_TEST : ${{ env.ZSXQ_GROUP_ID_TEST }}
-    - name: Test with pytest
       run: python demo.py
