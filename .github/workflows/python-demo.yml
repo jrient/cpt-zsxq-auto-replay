@@ -24,6 +24,6 @@ jobs:
       with:
         python-version: "3.10"
       env:
-          ZSXQ_GROUP_ID: ${{ env.ZSXQ_GROUP_ID }}
+          ZSXQ_GROUP_ID: ${{ secrets.ZSXQ_GROUP_ID }}
     - name: Test with pytest
       run: python demo.py
