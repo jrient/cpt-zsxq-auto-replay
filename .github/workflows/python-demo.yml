@@ -26,6 +26,6 @@ jobs:
     - name: Test with pytest
       env:
           ZSXQ_GROUP_ID: ${{ secrets.ZSXQ_GROUP_ID }}
-          OPENAI_API_KEY: ${{ env.OPENAI_API_KEY }}
-          ZSXQ_GROUP_ID_TEST : ${{ env.ZSXQ_GROUP_ID_TEST }}
+          ZSXQ_COOKIE : ${{ secrets.ZSXQ_COOKIE }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       run: python demo.py

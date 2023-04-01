@@ -5,6 +5,10 @@ name: Run Python script
 on:
   schedule:
     - cron: '* * * * *'
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 jobs:
   run-python-script:
     runs-on: ubuntu-latest
