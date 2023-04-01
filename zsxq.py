@@ -8,10 +8,13 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 if group_id is None:
     print("请设置环境变量 ZSXQ_GROUP_ID")
+    exit()
 if cookie is None:
     print("请设置环境变量 ZSXQ_COOKIE")
+    exit()
 if openai.api_key is None:
     print("请设置环境变量 OPENAI_API_KEY")
+    exit()
 
 # 访问知识星球API，获取问题列表
 def get_questions():
@@ -31,7 +34,7 @@ def get_questions():
 def get_answer(question):
     response = openai.Completion.create(
         model="text-davinci-003",
-        prompt=f"question",
+        prompt=f"{question}",
         temperature=0,
         max_tokens=64,
         top_p=1.0,
@@ -39,9 +42,8 @@ def get_answer(question):
         presence_penalty=0.0,
         stop=["\"\"\""]
     )
-    if response.status_code == 200:
-        print(answer)
-        answer = response.json()["choices"][0]["text"]
+    if response:
+        answer = response["choices"][0]["text"]
         return answer
     else:
         print("Unable to get answer.")
@@ -49,21 +51,29 @@ def get_answer(question):
 
 # 访问知识星球API，回答问题
 def post_answer(question_id, answer):
+    print(f"问题id：{question_id}")
     post_answer_url = f"https://api.zsxq.com/v2/topics/{question_id}/answer"
     response = requests.post(post_answer_url, headers={"Cookie": cookie}, json={
-        "image_ids": [],
-        "text": answer
+        "req_data":{
+            "image_ids": [],
+            "text": answer
+        }
     })
     if response.status_code == 200:
-        print("Answer posted successfully!")
+        if response.json()['succeeded']: 
+            print("Answer posted successfully!")
     else:
-        print("Unable to post answer.")
+        print("Unable to post answer.:"+response.text)
 
 # 主函数
 def main():
 
     # 获取问题列表
     questions_data = get_questions()
+
+    if questions_data == []:
+        print("未发现新问题")
+        exit()
 
     # 遍历问题列表，回答问题
     for question in questions_data:
