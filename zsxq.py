@@ -1,8 +1,10 @@
 import requests
+import openai
 
 group_id = '15552545558282'
 cookie = 'sensorsdata2015jssdkcross=%7B%22distinct_id%22%3A%2248281551825888%22%2C%22first_id%22%3A%221870c143c6f10b3-0552622f9e3c428-26031951-2073600-1870c143c7011d2%22%2C%22props%22%3A%7B%22%24latest_traffic_source_type%22%3A%22%E7%9B%B4%E6%8E%A5%E6%B5%81%E9%87%8F%22%2C%22%24latest_search_keyword%22%3A%22%E6%9C%AA%E5%8F%96%E5%88%B0%E5%80%BC_%E7%9B%B4%E6%8E%A5%E6%89%93%E5%BC%80%22%2C%22%24latest_referrer%22%3A%22%22%7D%2C%22identities%22%3A%22eyIkaWRlbnRpdHlfY29va2llX2lkIjoiMTg3MGMxNDNjNmYxMGIzLTA1NTI2MjJmOWUzYzQyOC0yNjAzMTk1MS0yMDczNjAwLTE4NzBjMTQzYzcwMTFkMiIsIiRpZGVudGl0eV9sb2dpbl9pZCI6IjQ4MjgxNTUxODI1ODg4In0%3D%22%2C%22history_login_id%22%3A%7B%22name%22%3A%22%24identity_login_id%22%2C%22value%22%3A%2248281551825888%22%7D%2C%22%24device_id%22%3A%221870c143c6f10b3-0552622f9e3c428-26031951-2073600-1870c143c7011d2%22%7D; UM_distinctid=1870c33fe3f7e9-0ba29ad83f5afa-26031951-1fa400-1870c33fe4046c; zsxqsessionid=0261a538542d9b12990ae4dc485b0b3b; zsxq_access_token=DE1BF64E-CC81-DFC4-C555-631028EBF90F_445E47E846A1FE31; __cuid=434a40f4f7174764a09ceb194738df9b; amp_fef1e8=9e1a1bab-4e47-40cf-8231-66ae67f31201R...1gssadlrs.1gssafbqb.n.1.o; abtest_env=beta'
 chatgtp_api_key = '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'
+openai.api_key = chatgtp_api_key
 
 # 访问知识星球API，获取问题列表
 def get_questions():
@@ -17,16 +19,18 @@ def get_questions():
 
 # 使用ChatGPT API，回答问题
 def get_answer(question):
-    chatgpt_api = "https://api.openai.com/v1/engines/davinci-codex/completions"
-    prompt = f"Q: {question}\nA:"
-    response = requests.post(chatgpt_api, headers={
-        "Authorization": f"Bearer {chatgtp_api_key}",
-        "Content-Type": "application/json"
-    }, json={
-        "prompt": prompt,
-        "temperature": 0.7,
-        "max_tokens": 1024
-    })
+    response = openai.Completion.create(
+        model="text-davinci-003",
+        prompt="今天是什么日子？",
+        temperature=0,
+        max_tokens=64,
+        top_p=1.0,
+        frequency_penalty=0.0,
+        presence_penalty=0.0,
+        stop=["\"\"\""]
+    )
+    print(response)
+    exit()
     if response.status_code == 200:
         print(answer)
         answer = response.json()["choices"][0]["text"]
