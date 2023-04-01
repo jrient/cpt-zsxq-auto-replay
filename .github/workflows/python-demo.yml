@@ -24,6 +24,7 @@ jobs:
       with:
         python-version: "3.10"
     - name: Test with pytest
+      run: echo $SECRETS_FILE_CONTENT | base64 -d > lib/path/to/secrets.dart
       env:
           ZSXQ_GROUP_ID: '${{ secrets.ZSXQ_GROUP_ID }}'
           OPENAI_API_KEY: '${{ env.OPENAI_API_KEY }}'
